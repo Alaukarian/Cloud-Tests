@@ -26,8 +26,8 @@ jobs:
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key_id: AKIAWEOUWBZPQALBNPV4
+          aws_secret_access_key: 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
           aws_region: us-east-1
           function_name: nord-test-func4
           zip_file: bundle.zip
