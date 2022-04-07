@@ -31,3 +31,4 @@ jobs:
           aws_region: us-east-1
           function_name: nord-test-func4
           zip_file: bundle.zip
+          
