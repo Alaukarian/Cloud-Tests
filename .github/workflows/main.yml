@@ -9,20 +9,19 @@ jobs:
     name: NC|CD Lambda
     runs-on: ubuntu-latest
     steps:
-        name: checkout_project
         uses: actions/checkout@v3
         uses: actions/setup-python@v3
-        name: Install dependencies
+        - name: Install dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install build
-        name: Build
+        - name: Build
         run: python -m build
-        name: zip creator
+        - name: zip creator
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./bundle.zip ./
-        name: normal deploy
+        - name: normal deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
