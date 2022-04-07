@@ -17,8 +17,8 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install build
         name: Build
-         run: python -m build
-       name: zip creator
+        run: python -m build
+        name: zip creator
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./bundle.zip ./
