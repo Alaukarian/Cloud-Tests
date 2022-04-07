@@ -1,4 +1,4 @@
-name: deploy to lambda
+name: Nord-GO!1
 on: [push]
 jobs:
   deploy_source:
@@ -31,4 +31,3 @@ jobs:
           aws_region: us-east-1
           function_name: nord-test-func4
           zip_file: bundle.zip
-          
