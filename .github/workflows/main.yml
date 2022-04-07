@@ -12,7 +12,7 @@ jobs:
    #   matrix:
    #     node-version: [12.x]
     steps:
-     #If using node, change to v1 - 
+    # if using node, change to v1 - 
        - name: checkout_project
         uses: actions/checkout@v3
      #If using JS, go for this - name: Use Node.js ${{ matrix.node-version }}
