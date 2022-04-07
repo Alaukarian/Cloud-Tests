@@ -1,33 +1,46 @@
-name: Nord-GO!1
-on: [push]
+name: Nord-GO!2
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   deploy_source:
-    name: build and deploy lambda
-    strategy:
-      matrix:
-        node-version: [12.x]
+    name: NC|CD Lambda
     runs-on: ubuntu-latest
+   # strategy:
+   #   matrix:
+   #     node-version: [12.x]
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install and build
+     #If using node, change to v1 - 
+       - name: checkout_project
+        uses: actions/checkout@v3
+     #If using JS, go for this - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-python@v3
+      #For node use setup-node@v1  
+      #with:
+       #   node-version: ${{ matrix.node-version }}
+       - name: Install dependencies
         run: |
-          npm ci
-          npm run build --if-present
-        env:
-          CI: true
-      - name: zip
+          python -m pip install --upgrade pip setuptools wheel
+          pip install build
+       - name: Build
+         run: python -m build
+     # - name: npm install and build
+     #   run: |
+     #     npm ci
+     #     npm run build --if-present
+     #   env:
+     #     CI: true
+      - name: zip creator
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./bundle.zip ./
-      - name: default deploy
+      - name: normal deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-east-1
-          function_name: nord-test-func4
+          aws_region: us-east-1 #change it to central europe for final build
+          function_name: nord-test-func4 #Could be a variable, but how and why implement it?
           zip_file: bundle.zip
