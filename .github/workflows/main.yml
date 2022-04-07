@@ -8,30 +8,16 @@ jobs:
   deploy_source:
     name: NC|CD Lambda
     runs-on: ubuntu-latest
-   # strategy:
-   #   matrix:
-   #     node-version: [12.x]
     steps:
-    # if using node, change to v1 - 
        - name: checkout_project
         uses: actions/checkout@v3
-     #If using JS, go for this - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-python@v3
-      #For node use setup-node@v1  
-      #with:
-       #   node-version: ${{ matrix.node-version }}
        - name: Install dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install build
        - name: Build
          run: python -m build
-     # - name: npm install and build
-     #   run: |
-     #     npm ci
-     #     npm run build --if-present
-     #   env:
-     #     CI: true
       - name: zip creator
         uses: montudor/action-zip@v0.1.0
         with:
