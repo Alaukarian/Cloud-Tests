@@ -1,6 +1,9 @@
 name: Nord-GO!3
-on: [push, pull_request]
-  brances: [main]
+on: 
+ push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   deploy_source:
     name: NC|CD Lambda
