@@ -1,10 +1,8 @@
-name: Nord-GO!3
-on: 
- push:
-    branches: [main]
+name: deploy to lambda
+on: [push]
 jobs:
   deploy_source:
-    name: NC|CD Lambda
+    name: NordGO!5
     strategy:
       matrix:
         node-version: [12.x]
@@ -21,14 +19,6 @@ jobs:
           npm run build --if-present
         env:
           CI: true
-        uses: actions/checkout@v3
-        uses: actions/setup-python@v3
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          pip install build
-      - name: Build
-      run: python -m build
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
@@ -38,6 +28,6 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-east-1 #change it to central europe for final build
-          function_name: nord-test-func4 #Could be a variable, but how and why implement it?
+          aws_region: us-east-1
+          function_name: nord-test-func4
           zip_file: bundle.zip
