@@ -1,4 +1,4 @@
-#Step by Step
+# Step by Step
 
 - Go to AWS and create a AWS Lambda Function
 - On AWS IAM portal, create an access key for the github. Save both public and private key.
